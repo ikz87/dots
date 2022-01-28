@@ -6,6 +6,8 @@ Colors from the bar will be picked up from you Xresources, so if the bar doesn't
 
 Layout and workspaces modules will only work on bspwm (they depend on bspc).
 
+Dimensions of the bar are specifically set for a 1920x1080 screen
+
 If you come from unixporn, these dots don't include the thumbnail displayed on the left bar, since that's a program completely dettached from polybar.
 
 ## List of dependencies (probably incomplete):
