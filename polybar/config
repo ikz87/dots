@@ -102,7 +102,7 @@ modules-right = gl4 roficonf
 wm-restack = bspwm
 width = 23.1%                                                          
 height = ${misc.height}                                                        
-offset-x = 75.9%                                                      
+offset-x = 75.8%                                                      
 offset-y = ${misc.offset-y}                                                        
 radius = ${misc.radius} 
 border-size = ${misc.border-size}
@@ -123,7 +123,7 @@ wm-restack = bspwm
 width = 23.1%
 cursor-click = pointer
 height = ${misc.height}
-offset-x = 75.9%
+offset-x = 75.8%
 offset-y = ${misc.offset-y}
 radius = ${misc.radius}
 tray-offset-x = -15${misc.radius}
@@ -307,7 +307,7 @@ inherit = module/right
 type = custom/script
 exec = date +'%d/%m/%g ~ %H:%M'
 interval = 1
-click-left = source "${HOME}/.cache/wal/colors.sh"; kitty -o font_family="CartographCF" -o window_padding_width=4 -o font_size=14 -o cursor="$color0" --class Polycal -e bash -c 'cal; while [[ $window == "" ]]; do window=`xdotool search --class Polycal`; done; xdotool behave $window mouse-leave windowclose 2> /dev/null > /dev/null; while true; do sleep 100; done;' &
+click-left = yad --calendar --undecorated --fixe --close-on-unfocus --no-buttons --width="405" --height="200" --posx=1470 --posy=55 &
 
 [module/kblayout]
 inherit = module/right
