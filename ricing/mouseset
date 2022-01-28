@@ -1,0 +1,14 @@
+#!/bin/bash
+
+dev=`xinput | grep Touchpad`
+dev=`echo "${dev##*=}" | awk '{print $1}'`
+prop=`xinput list-props $dev | grep "Tapping Enabled" | head -1 | awk '{print $4}' | grep -o '[0-9]\+'`
+
+xinput set-prop $dev $prop 1
+
+dev=`xinput | grep Touchpad`
+dev=`echo "${dev##*=}" | awk '{print $1}'`
+prop=`xinput list-props $dev | grep "Natural Scrolling Enabled" | head -1 | awk '{print $5}' | grep     -o '[0-9]\+'` 
+
+#echo $dev $prop
+xinput set-prop $dev $prop 1

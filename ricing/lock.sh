@@ -1,0 +1,40 @@
+pkill -SIGUSR1 dunst # pause
+i3lock -i ~/Pictures/Important/lockscreen.png\
+    --force-clock\
+    --pass-volume-keys\
+    --inside-color=00000000\
+    --insidever-color=00000000\
+    --insidewrong-color=00000000\
+    --time-color=ffffffff\
+    --time-pos=1350:440\
+    --date-color=ffffffff\
+    --verif-text=""\
+    --wrong-text=""\
+    --time-str="%H:%M"\
+    --ind-pos=1350:600\
+    --radius 40\
+    --time-font=undefined\
+    --date-font=undefined\
+    --ring-color=555555ff\
+    --keyhl-color=ffffffff\
+    --bshl-color=FF3939\
+    --ringver-color=39DBFF\
+    --ringwrong-color=FF3939\
+    --no-modkey-text\
+    --ring-width 15\
+    --indicator -F -e\
+    --noinput-text=""\
+    --time-size=100\
+    --date-size=50\
+    --date-pos=1350:510\
+    --time-color=ffffffff\
+    --greeter-color=ffffffff\
+    --greeter-text="kz87"\
+    --greeter-size=50\
+    --greeter-color=ffffffff\
+    --greeter-pos=1350:730\
+    --greeter-font=undefined\
+    --greeter-color=ffffffff\
+    --date-str="%A ~ %d/%m/%g"\
+    -n
+pkill -SIGUSR2 dunst # resume

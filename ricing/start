@@ -1,0 +1,30 @@
+#!/bin/bash
+
+[[ $# -ne 1 ]] && echo You must provide exactly one graphical interface && exit
+
+[[ `ls ~/.is/ | grep -i -c $1` -eq 0 ]] && echo $1 is not a valid interface && exit
+
+interface=`ls ~/.is/ | grep -i $1`
+
+pcheck(){ #checks if script is already running, exiting if that's the case
+pcount=0
+
+	for i in `ps -e`; do
+
+		if [[ $i == "Xorg" ]]
+		then
+			pcount=$(( pcount + 1))
+		fi;
+	done
+
+	if [ "$pcount" -gt $(( 0 )) ]
+	then
+        echo X is already running, initialize it manually && exit
+	fi;
+}
+
+cat ~/.is/$1 > ~/.xinitrc
+#pcheck $1
+startx
+
+

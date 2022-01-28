@@ -1,0 +1,88 @@
+#!/usr/bin/sh
+
+CD=~/.config/ #xdg config directory
+[[ -z $2 ]] && EDITOR=nvim || EDITOR=$2
+
+if [ -z $1 ] ; then
+	$EDITOR $( dirname "$0" )/config
+	exit
+fi
+
+case $1 in
+	picom)
+		$EDITOR ~/.config/picom.conf
+	;;
+	xmonad)
+		$EDITOR ~/.xmonad/xmonad.hs
+	;;
+	glava)
+		$EDITOR ~/.config/glava/rc.glsl
+	;;
+	qtile)
+		$EDITOR ~/.config/qtile/config.py
+	;;
+	dwm)
+		DWMDIR=~/dwm-6.2
+		$EDITOR $DWMDIR/config.h
+		make -C $DWMDIR 
+	;;
+	vim|bash|zsh|xinit)
+		$EDITOR ~/.$1rc
+	;;
+	kak|bspwm|dunst)
+		$EDITOR ~/.config/$1/$1rc
+	;;
+	autostart)
+		$EDITOR ~/.config/bspwm/autostart
+	;;
+	sxhkd)
+		$EDITOR ~/.config/bspwm/sxhkdrc
+	;;
+	kak-lsp)
+		$EDITOR ~/.config/$1/$1.toml
+	;;
+	nvim)
+		$EDITOR $CD/nvim/init.vim
+	;;
+	kitty)
+		$EDITOR $CD/kitty/kitty.conf
+	;;
+	ranger)
+		$EDITOR $CD/ranger/rc.conf
+	;;
+	i3|i3blocks|cava|polybar)
+		$EDITOR $CD/$1/config
+	;;
+	rofi)
+		$EDITOR ~/.config/rofi/config.rasi
+	;;
+	fish)
+		$EDITOR $CD/$1/config.$1
+	;;
+	alacritty)
+		alacritty_dirs="$HOME/alacritty/alacritty.yml $HOME/alacritty.yml\
+		$HOME/.config/alacritty/alacritty.yml $HOME/.alacritty.yml"
+		for f in $alacritty_dirs
+		do
+			if [ -f $f ]; then
+				$EDITOR $f
+				return
+			fi
+		done
+		$EDITOR ~/.alacritty.yml
+	;;
+	simpscript)
+	    $EDITOR ~/.vtuberstuff/simpscript
+	;;
+	
+	awesome)
+			$EDITOR ~/.config/awesome/rc.lua
+
+	;;
+
+	*)
+		echo "unknown config file"
+	;;
+		
+		
+esac

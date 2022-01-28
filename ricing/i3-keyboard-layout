@@ -1,0 +1,65 @@
+#!/bin/bash
+
+#echo `~/.ricing/pcheck i3-keyboard-layout`
+
+[[ `~/.ricing/pcheck i3-keyboard-layout` -eq $(( 1 )) ]] && exit
+
+
+set -e
+
+get_kbdlayout() {
+  layout=$(setxkbmap -query | grep -oP 'layout:\s*\K([\w,]+)')
+  variant=$(setxkbmap -query | grep -oP 'variant:\s*\K(\w+)')
+  echo "$layout" "$variant"
+}
+
+set_kbdlayout() {
+  eval "array=($1)"
+  setxkbmap "${array[@]}"
+  pgrep i3status | xargs --no-run-if-empty kill -s USR1 # tell i3status to update
+}
+
+cycle() {
+  current_layout=$(get_kbdlayout | xargs)
+  layouts=("$@" "$1") # add the first one at the end so that it cycles
+  index=0
+  while [ "${layouts[$index]}" != "$current_layout" ] && [ $index -lt "${#layouts[@]}" ]; do index=$[index +1]; done
+  next_index=$[index +1]
+  next_layout=${layouts[$next_index]}
+  set_kbdlayout "$next_layout"
+  #echo $next_layout
+  rofiarg=''
+  [[ $next_layout == "es" ]] && rofiarg="ES" || rofiarg="EN" 
+  #rofi -e " $rofiarg" -color-normal "#140029,#3CFF43,#140029,#140029,#eee8d5" -color-window "#140029,#3CFF43,#140029" -font "Undefined 60" -width -4& sleep 0.3 && killall rofi 
+  #killall notify-rofi
+  #sleep 1
+#  notify-rofi $rofiarg&
+}
+
+i3status() {
+  while :
+  do
+    read line
+    block="{\"full_text\":\"$(get_kbdlayout)\"}"
+    echo "${line/\[\{/\[$block,\{}"|| exit 1
+  done
+}
+
+subcommand="$1"
+shift || (echo "Please specify one of: get, set <layout>, cycle <layout1> <layout2> ... <layoutN>, i3status" && exit)
+
+case $subcommand in
+  "get")
+    echo -n $(get_kbdlayout)
+    ;;
+  "set")
+    set_kbdlayout "$1"
+    ;;
+  "cycle")
+    cycle "$@"
+    ;;
+  "i3status")
+    i3status
+    ;;
+esac
+

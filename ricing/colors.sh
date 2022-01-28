@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+source "${HOME}/.cache/wal/colors.sh"
+echo "color 0 is $color0"
+echo "color 1 is $color1"
+echo "color 2 is $color2"
+echo "color 3 is $color3"
+echo "color 4 is $color4"
+echo "color 5 is $color5"
+echo "color 6 is $color6"
+echo "color 7 is $color7"
+echo "color 8 is $color8"
+echo "color 9 is $color9"
+echo "color 10 is $color10"
+echo "color 11 is $color11"
+echo "color 12 is $color12"
+echo "color 13 is $color13"
+echo "color 14 is $color14"
+echo "color 15 is $color15"
+
+echo "foreground is $foreground and background is $background"

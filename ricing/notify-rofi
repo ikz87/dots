@@ -1,0 +1,25 @@
+#!/bin/bash
+source "${HOME}/.cache/wal/colors.sh"
+killall rofi
+size=70
+[[ $3 != "" ]] && size=$3
+chars=`expr length "$2"`
+chars=$(( chars + 2 ))
+color0=\#$alpha`echo $color0 | sed 's/\#//g'`
+case $1 in
+	wpcs)
+		chars=10
+		rofi -e "$2"  -color-normal "$color0,$color15,$color9,$color5,$color9" -color-window "$color0,$color9,$color9" -markup -bw 5 -font "CartographCF $size" -location 0 -yoffset -70 -width 56 -line-margin 0 -padding 36 -normal-window& pid=$!; sleep 0.45 && [[ `ps -p $pid -o comm=` == "rofi" ]] && kill -9 $pid 
+	;;
+	kb)
+		kbl=`echo $2 | sed 's/us/US/g' | sed 's/es/ES/g'`
+		chars=4
+		rofi -e " $kbl"  -color-normal "$color0,$color15,$color9,$color5,$color9" -color-window "$color0,$color9,$color9" -markup -bw 5 -font "CartographCF $size" -location 0 -yoffset -70 -width -$chars -padding 0 -normal-window& pid=$!; sleep 0.3 && [[ `ps -p $pid -o comm=` == "rofi" ]] && kill -9 $pid
+	;;
+  bat)
+		rofi -e "  $2"  -color-normal "$color0,$color15,$color9,$color5,$color9" -color-window "$color0,$color9,$color9" -markup -bw 5 -font "CartographCF $size" -location 0 -yoffset -70 -width -$chars& pid=$!; sleep 20 && kill -9 $pid && (~/.config/bspwm/quit.sh; shutdown now)
+	;;
+	*)
+		echo "Uknown option"
+	;;
+esac
