@@ -339,6 +339,7 @@ click-left = ~/.ricing/i3-keyboard-layout cycle es us && polybar-msg hook kblayo
 label-foreground = ${colors.foreground} 
 label-font = 4
 type = custom/script 
+;Remove the pipe and everything after it if you want this to work easily
 exec = ~/.config/polybar/scripts/info-cava.py | while read line; do echo "`cat ~/.ricing/cavacolors`$line"; done 
 tail = true
 click-left = pavucontrol -t 2&
