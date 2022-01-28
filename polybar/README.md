@@ -8,7 +8,7 @@ Layout and workspaces modules will only work on bspwm (they depend on bspc).
 
 Font sizes are specifically set for a 1920x1080 screen
 
-If you come from unixporn, these dots don't include the thumbnail displayed on the left bar, since that's a program completely dettached from polybar.
+If you come from unixporn, these dots don't include the thumbnail displayed on the left bar, since that's a program completely dettached from polybar (see polaybar/scripts/bappicons).
 
 ## List of dependencies (probably incomplete):
 -> xdo
