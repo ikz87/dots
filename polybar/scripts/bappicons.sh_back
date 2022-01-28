@@ -1,0 +1,41 @@
+#!/bin/bash
+width=$(( `xrandr --current | grep primary | cut -c24-27` ))
+readjust()
+{
+    sleep 1 
+    #xdo lower `xdotool search pqiv:`
+    #xdo lower `xdotool search polybar-left` 
+}
+
+last_class="none"
+bspc subscribe node_focus desktop_focus node_remove | while read line;
+do 
+    if [[ `playerctl status` != "Playing" ]]
+    then
+        tname=`xprop -id $(xdotool getwindowfocus)`
+        class=`xwinfo -i $(xdotool getwindowfocus)`
+        if [[ $class = "N/A" ]]
+        then
+        [[ $width -eq 1920 ]] && convert ~/Pictures/Wallpapers/smashball.png -resize 30x30^ -bordercolor '#ff3061' -border 5 /tmp/thumbnail.png >/dev/null 2>/dev/null || convert ~/Pictures/Wallpapers/smashball.png -resize 20x20^ -bordercolor '#ff3061' -border 3 /tmp/thumbnail.png >/dev/null 2>/dev/null
+
+        [[ $width -eq 1920 ]] && (pgrep pqiv || (pqiv /tmp/thumbnail.png -P 256,20& readjust)&) || (pgrep pqiv || (pqiv /tmp/thumbnail.png -P 171,13& readjust)&) 
+            last_class=$class
+        elif [[ $class != $last_class ]] 
+        then
+            last_class=$class
+            not_empty=0
+            for i in `ls ~/.ricing/icons | sed 's/.png//g'`; do
+            if [[ `echo $tname | grep -i -c $i` -ne 0 ]]
+            then 
+                not_empty=1
+                icon=~/.ricing/icons/$i.png
+
+                [[ $width -eq 1920 ]] && convert $icon -resize 30x30^ -background '#743342' -gravity center -extent 53x30 -bordercolor '#ff3061' -border 5 /tmp/thumbnail.png || convert $icon -resize 20x20^ -background '#743342' -gravity center -extent 36x20 -bordercolor '#ff3061' -border 3 /tmp/thumbnail.png
+                [[ $width -eq 1920 ]] && (pgrep pqiv || (pqiv /tmp/thumbnail.png -P 256,20& readjust)&) || (pgrep pqiv || (pqiv /tmp/thumbnail.png -P 171,13& readjust)&)
+                
+                break
+            fi;
+            done;
+        fi;
+     fi;
+done; 

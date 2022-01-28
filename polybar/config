@@ -22,7 +22,7 @@ foreground = ${xrdb:foreground:#222}
 primary = ${xrdb:color9:#222}
 secondary = ${xrdb:color2:#222}
 
-
+;Edit background 1 through 3 to give the central bar more colors
 background1 = ${xrdb:color0:#222}
 background2 = ${xrdb:color0:#222}
 background3 = ${xrdb:color0:#222}
@@ -162,7 +162,7 @@ modules-left = exitop time kblayout
 
 ;MODULES
 
-;xdo module
+;xdo module to get all shadows right
 [module/readjust]
 type = custom/script
 exec = sleep 5 && xdo lower `xdotool search --name 'polybar-trayfix'` && xdo lower `xdotool search --name 'polybar-center'` && xdo lower `xdotool search --name 'polybar-left'` && xdo lower `xdotool search root 2> /dev/null` && xdo lower `xdotool search root 2> /dev/null`
@@ -231,11 +231,6 @@ content = " "
 
 ;tag modules
 
-[module/tags]
-format-font = 2
-;format-background = #01003600
-format-foreground = #6AFF74
-label-underline = #b969fe
 
 ;center
 
@@ -256,16 +251,13 @@ format-foreground = ${colors.foreground}
 format-font = 1
 
 
+;Scripts
 
 [module/wpcs]
 format-foreground = ${colors.foreground} 
 label-foreground = ${colors.foreground} 
-;label-underline = #b969fe
-;type = custom/ipc
-;hook-0 = ~/.polyscripts/wpm.sh
-;initial = 1
 type = custom/script
-exec = ~/.polyscripts/wpmsubbed.sh
+exec = ~/.config/polybar/scripts/wpmsubbed.sh
 click-left = ~/.ricing/rofi.sh window &
 ;interval = 0
 tail = 1
@@ -274,7 +266,7 @@ tail = 1
 format-font = 2
 format-foreground = ${colors.foreground} 
 type = custom/script
-exec = ~/.polyscripts/layoutsubbed.sh
+exec = ~/.config/polybar/scripts/layoutsubbed.sh
 tail = 1
 click-left = bspc desktop focused --layout next && polybar-msg hook layout 1 &
 
@@ -282,7 +274,7 @@ click-left = bspc desktop focused --layout next && polybar-msg hook layout 1 &
 inherit = module/center
 label-background = ${colors.background3}
 type = custom/script
-exec = ~/.polyscripts/battery_info.sh
+exec = ~/.config/polybar/scripts/battery_info.sh
 interval = 2
 
 [module/rofi]
@@ -310,21 +302,21 @@ interval = 5
 inherit = module/center
 label-background = ${colors.background3}
 type = custom/script
-exec = ~/.polyscripts/cpu_info.sh
+exec = ~/.config/polybar/scripts/cpu_info.sh
 interval = 1
 
 [module/tmp]
 inherit = module/center
 label-background = ${colors.background1}
 type = custom/script
-exec = ~/.polyscripts/temp_info.sh
+exec = ~/.config/polybar/scripts/temp_info.sh
 interval = 2
 
 [module/ram]
 inherit = module/center
 label-background =${colors.background2}
 type = custom/script
-exec = ~/.polyscripts/ram_info.sh
+exec = ~/.config/polybar/scripts/ram_info.sh
 interval = 2
 
 
@@ -347,7 +339,7 @@ click-left = ~/.ricing/i3-keyboard-layout cycle es us && polybar-msg hook kblayo
 label-foreground = ${colors.foreground} 
 label-font = 4
 type = custom/script 
-exec = ~/.polyscripts/info-cava.py | while read line; do echo "`cat ~/.ricing/cavacolors`$line"; done
+exec = ~/.config/polybar/scripts/info-cava.py | while read line; do echo "`cat ~/.ricing/cavacolors`$line"; done 
 tail = true
 click-left = pavucontrol -t 2&
 
