@@ -8,7 +8,10 @@ Layout and workspaces modules will only work on bspwm (they depend on bspc)
 
 ## List of dependencies (probably incomplete):
 -> xdo
+
 -> xdotool
+
 -> FontAwesome
+
 -> Caskaydia Cove Nerd Font (Any nerd font will work, but you'll need to change polybar's config)
 
