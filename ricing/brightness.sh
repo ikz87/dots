@@ -14,7 +14,7 @@ function get_brightness {
 function send_notification {
     DIR=`dirname "$0"`
     brightness=`get_brightness`
-    icon_name="~/Pictures/Important/b.png"
+    icon_name="~/Pictures/Important/icons/other/b.png"
 bn=$(( (brightness + 5) / 5 ))
 bar=$(seq -s "" $bn | sed 's/[0-9]//g')
 
