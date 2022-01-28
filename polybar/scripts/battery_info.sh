@@ -10,7 +10,7 @@ notify()
             if  [[ $lstate -ne 3 ]]
             then
                 echo 3 > /tmp/batstate 
-                ~/.ricing/notify-send.sh "Charging $BAT_LEVEL%ϟ" -i "~/.ricing/battery_charging.png" -t 2000 --replace=550 -u critical
+                ~/.ricing/notify-send.sh "Charging $BAT_LEVEL%ϟ" -i "~/Pictures/Important/icons/other/battery_charging.png" -t 2000 --replace=550 -u critical
             fi;       
         ;;
         high)
@@ -20,7 +20,7 @@ notify()
             if  [[ $lstate -gt 1 ]] 
             then
                 echo 1 > /tmp/batstate
-                ~/.ricing/notify-send.sh "Warning: $BAT_LEVEL% Battery left" -i "~/.ricing/battery_mid.png" -t 10000 --replace=550 -u critical
+                ~/.ricing/notify-send.sh "Warning: $BAT_LEVEL% Battery left" -i "~/Pictures/Important/icons/other/battery_mid.png" -t 10000 --replace=550 -u critical
             fi;
         ;;
         low)
