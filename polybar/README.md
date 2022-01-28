@@ -15,7 +15,10 @@ If you come from unixporn, these dots don't include the thumbnail displayed on t
 
 -> xdotool
 
+-> wmctrl
+
 -> FontAwesome
 
 -> Caskaydia Cove Nerd Font (Any nerd font will work, but you'll need to change polybar's config)
 
+-> CartographCF (You can change this one for any font of your liking)
