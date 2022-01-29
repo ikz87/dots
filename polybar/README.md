@@ -7,8 +7,7 @@ Colors for the bar will be picked up from your Xresources, so if the bar doesn't
 Layout and workspaces modules will only work on bspwm (they depend on bspc).
 
 Font sizes are specifically set for a 1920x1080 screen
-
-If you come from unixporn, these dots don't include the thumbnail displayed on the left bar, since that's a program completely dettached from polybar (see polaybar/scripts/bappicons.sh).
+polybar's config doesn't include the thumbnail displayed on the left bar, since that's a program completely dettached from polybar (see polaybar/scripts/bappicons.sh).
 
 ## List of dependencies (probably incomplete):
 -> xdo
