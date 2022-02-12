@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+
+# apply colorscheme to wallpaper
+~/.ricing/wal-spotify.sh > /dev/null&
+
+# Source the colorscheme
+echo alpha="dd" >> "${HOME}/.cache/wal/colors.sh"
+source "${HOME}/.cache/wal/colors.sh"
+
+# Color for cava
+killall playcheck.sh
+#~/.ricing/playcheck.sh 2> /dev/null &
+
+# Authentication agent
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1&
+
+# mapcheck
+killall osucheck.sh
+~/.osuthings/osucheck.sh "/home/$USER/.osutmp"&
+~/.osuthings/osucheck.sh "/home/$USER/Downloads"&
+
+# Statusbar
+killall polybar
+~/.config/polybar/launch.sh
+
+#Applets
+killall blueman-applet
+killall pa-applet
+killall nm-applet
+killall flameshot
+blueman-applet&
+pa-applet& 
+nm-applet&
+flameshot&
+    
+# Notification manager
+killall dunst
+dunst -lf  $foreground \
+      -lb  $color0$alpha \
+      -lfr $color9\
+      -nf  $foreground \
+      -nb  $color0$alpha \
+      -nfr $color9 \
+      -cf  $foreground \
+      -cb  $color0$alpha \
+      -cfr $color9 > /dev/null 2>&1 &
+
+# Master layout
+for (( i=1; i < 10; i++));do
+    #bsp-layout set tiled $i
+    true
+done
+
+
+# Walllpaper
+hsetroot -cover ~/Pictures/Important/wallpaper.png
+xdo lower `xdotool search "pqiv: /home/kz87"`
+
+# cursor
+xsetroot -cursor_name left_ptr &
+
+# idle
+killall .idle.sh
+pgrep .idle.sh || ~/.idle.sh > /dev/null 2> /dev/null&
+
+# borders
+#.bscripts/borders.sh&
+
+# Windows-like alt+tab
+killall alttab
+#alttab -i 120x120 -bg "$color0" -fg "$foreground" -frame "$color9" -bc "$foreground" -bw 2 -font 'xft:CascadiaCode-12'&
+
+# Compositor
+#killall picom
+#sleep 1
+picom --experimental-backends --config ~/.config/picom.conf &
+
+# media thumbnail
+killall bmediaimg.sh
+killall cava
+killall bappicons.sh
+#~/.config/polybar/scripts/bmediaimg.sh > /dev/null 2> /dev/null&
+~/.config/polybar/scripts/bappicons.sh > /dev/null 2> /dev/null&
+
+
+
+# Launch keybinding daemon
+killall sxhkd
+sxhkd -c ~/.config/bspwm/sxhkdrc > /dev/null 2> /dev/null&
+
