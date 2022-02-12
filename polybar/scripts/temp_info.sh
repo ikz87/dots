@@ -17,7 +17,7 @@ then
     fg="#FFC139"
 else
     icon=
-    fg="$color15"
+    fg="$color14"
 fi;
 
 echo "%{F$fg}$TEMP $icon%{F-}"

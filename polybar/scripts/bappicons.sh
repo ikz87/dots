@@ -22,22 +22,23 @@ thumbrender (){
 
 bspc subscribe node_focus desktop_focus node_remove | while read line;
 do
-    # Get full properties (tname) and class name of focused window 
+    echo cycle
+    # Get full properties (tname) and class name    
     tname=`xprop -id $(xdotool getwindowfocus)`    
     class=`xwinfo -i $(xdotool getwindowfocus)`
     
     # Only run if no media is playing
-    if [[ `playerctl status 2> /dev/null` != "Playing" && $class != $last_class ]]
+    if [[ $class != $last_class ]]
     then
         if [[ $class = "N/A" ]]
         then
-            # Use the arch logo if no windows are open
             class=arch
             tname=arch
         fi;
         last_class=$class
         not_empty=0
         for i in `ls $icondir | sed 's/.png//g'`; do
+
             if [[ `echo $tname | grep -i -c $i` -ne 0 ]]
             then 
                 not_empty=1

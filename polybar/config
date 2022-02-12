@@ -32,7 +32,7 @@ background4 = ${xrdb:color9:#222}
 [misc]
 radius = 15
 height = 2.9%
-offset-y = 1.8%
+offset-y = 1.85%
 border-size = 5
 
 ;Left bar
@@ -60,7 +60,7 @@ font-1 = FontAwesome5Free:style=Solid:size=15:antialias=true;3
 font-2 = CartographCF:size=16;3
 
 modules-left = wpcs layout
-modules-right = info-cava
+;modules-right = info-cava
 
 
 
@@ -88,8 +88,8 @@ module-margin-left = 0
 module-margin-right = 0
 
 font-0 = CartographCF:pixelsize=14;1
-font-1 = CaskaydiaCoveNerdFont:style=Solid:pixelsize=15:antialias=true;3
-font-2 = CaskaydiaCoveNerdFont:style=Solid:pixelsize=20:antialias=true;5
+font-1 = CaskaydiaCoveNerdFont:pixelstyle=Solid:size=15:antialias=true;3
+font-2 = CaskaydiaCoveNerdFont:pixelstyle=Solid:size=20:antialias=true;5
 font-3 = FontAwesome5Free:style=Solid:pixelsize=13:antialias=true;3  
 
 
@@ -223,7 +223,7 @@ content = " "
 ;center
 
 [module/center]
-label-foreground = ${colors.foreground}
+label-foreground = ${xrdb:color14:#222}
 label-font = 0
 label-underline = ${colors.background} 
 
@@ -257,7 +257,7 @@ inherit = module/center
 label-background = ${colors.background3}
 type = custom/script
 exec = ~/.config/polybar/scripts/battery_info.sh
-interval = 2
+interval = 1
 
 [module/rofi]
 inherit = module/center
@@ -320,7 +320,7 @@ click-left = ~/.ricing/i3-keyboard-layout cycle es us && polybar-msg hook kblayo
 label-foreground = ${colors.foreground} 
 label-font = 3
 type = custom/script 
-exec = python ~/.config/polybar/scripts/info-cava.py | while read line; do echo "`cat ~/.ricing/cavacolors`$line"; done 
+exec = python ~/.config/polybar/scripts/info-cava.py -f 24
 tail = true
 click-left = pavucontrol -t 2&
 

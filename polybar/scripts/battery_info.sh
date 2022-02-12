@@ -10,7 +10,7 @@ notify()
             if  [[ $lstate -ne 3 ]]
             then
                 echo 3 > /tmp/batstate 
-                ~/.ricing/notify-send.sh "Charging $BAT_LEVEL%ϟ" -i "~/Pictures/Important/icons/other/battery_charging.png" -t 2000 --replace=550 -u critical
+                pop_report -d 800 -m "<span style=\"font-family: CartographCF;\">Charging</span><font size=\"-1\"> ﮣ</font>$icon" -t battery_charging -o "font-size: 70px" "font-family: CaskaydiaCoveNerdFont" "padding-right: 30px"
             fi;       
         ;;
         high)
@@ -26,15 +26,15 @@ notify()
         low)
             if [[ $lstate -gt 0 ]] 
             then 
-            echo 0 > /tmp/batstate
-            ~/.ricing/notify-rofi bat "Battery is critically low, computer will shut down shortly unless you manually close this message" 20
+                echo 0 > /tmp/batstate
+                pop_report -m "Battery is critically low" -d 3000 -t battery_low
             fi;
         ;;
     esac
 }
 
 # Set necessary info
-fg="$color15"
+fg="$color14"
 lstate=`cat /tmp/batstate`
 ACPI_RES=$(acpi -b)
 BAT_LEVEL_ALL=$(echo "$ACPI_RES" | grep -v "unavailable" | grep -E -o "[0-9][0-9]?[0-9]?%")

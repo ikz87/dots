@@ -16,7 +16,7 @@ elif [[ $cpuwhole -ge 70 ]]
 then
     fg="#FFC139"
 else
-    fg="$color15"
+    fg="$color14"
 fi;
 
 [[ $cpuwhole -lt 10 ]] && echo "%{F$fg} $CPU_USAGE% %{T4}%{T-}%{F-}" || echo "%{F$fg}$CPU_USAGE% %{T4}%{T-}%{F-}" 
